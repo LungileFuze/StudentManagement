@@ -2,7 +2,7 @@
 
 namespace StudentManagement.ViewModels.Student
 {
-    public class StudentViewModel
+    public class StudentDetailsViewModel
     {
         public int Id { get; set; }
 
@@ -13,5 +13,7 @@ namespace StudentManagement.ViewModels.Student
         public string Email { get; set; } = string.Empty;
 
         public Gender Gender { get; set; }
+
+        public IEnumerable<string> Courses { get; set; } = new List<string>();
     }
 }

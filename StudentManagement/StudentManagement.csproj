@@ -11,8 +11,6 @@
     <Folder Include="Repositories\Interfaces\" />
     <Folder Include="Repositories\Implementation\" />
     <Folder Include="Services\Implementation\" />
-    <Folder Include="ViewModels\Course\" />
-    <Folder Include="ViewModels\Enrollment\" />
   </ItemGroup>
 
   <ItemGroup>
