@@ -1,9 +1,14 @@
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using StudentManagement.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<StudentManagementDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("StudentManagementConnection")));
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 

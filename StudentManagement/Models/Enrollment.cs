@@ -1,4 +1,6 @@
-﻿namespace StudentManagement.Models
+﻿using StudentManagement.Enums;
+
+namespace StudentManagement.Models
 {
     public class Enrollment
     {
@@ -16,6 +18,6 @@
 
         public decimal? FinalMark { get; set; }
 
-        public string Status { get; set; } = "Active";
+        public EnrollmentStatus Status { get; set; } = EnrollmentStatus.Active;
     }
 }

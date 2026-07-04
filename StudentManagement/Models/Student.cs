@@ -1,4 +1,5 @@
-﻿namespace StudentManagement.Models
+﻿using StudentManagement.Enums;
+namespace StudentManagement.Models
 {
     public class Student
     {
@@ -11,6 +12,8 @@
         public string LastName { get; set; } = string.Empty;
 
         public string Email { get; set; } = string.Empty;
+
+        public Gender Gender { get; set; }
 
         public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     }

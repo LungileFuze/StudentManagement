@@ -16,7 +16,7 @@ namespace StudentManagement.Configurations
 
             builder.Property(e => e.FinalMark).HasColumnType("decimal(5,2)");
 
-            builder.Property(e => e.Status).IsRequired().HasMaxLength(20);
+            builder.Property(e => e.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
 
             builder.HasOne(e => e.Student).WithMany(s => s.Enrollments).HasForeignKey(e => e.StudentId).OnDelete(DeleteBehavior.Cascade);
 

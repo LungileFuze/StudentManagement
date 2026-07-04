@@ -24,6 +24,8 @@ namespace StudentManagement.Configurations
 
             builder.HasIndex(s => s.Email).IsUnique();
 
+            builder.Property(s => s.Gender).HasConversion<string>().HasMaxLength(20).IsRequired();
+
             builder.HasMany(s => s.Enrollments).WithOne(e => e.Student).HasForeignKey(e => e.StudentId).OnDelete(DeleteBehavior.Cascade);
         }
     }
