@@ -23,14 +23,14 @@ namespace StudentManagement.Services.Implementation
         public async Task<StudentDetailsViewModel?> GetByIdAsync(int id)
         {
             var student = await _studentRepository.GetByIdAsync(id);
-            if (student == null)throw new Exception("Student not found");
+            if (student == null)return null;
             return student.ToDetailsViewModel();
         }
 
         public async Task<StudentFormViewModel?> GetForEditAsync(int id)
         {
             var student = await _studentRepository.GetByIdAsync(id);
-            if (student == null) throw new Exception("Student not found");
+            if (student == null) return null;
             return student.ToFormViewModel();
         }
 
@@ -41,21 +41,23 @@ namespace StudentManagement.Services.Implementation
             await _studentRepository.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(StudentFormViewModel model)
+        public async Task<bool> UpdateAsync(StudentFormViewModel model)
         {
             var student = await _studentRepository.GetByIdAsync(model.Id);
-            if (student == null) throw new Exception("Student not found");
+            if (student == null) return false;
             student.UpdateEntity(model);
             _studentRepository.Update(student);
             await _studentRepository.SaveChangesAsync();
+            return true;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var student = await _studentRepository.GetByIdAsync(id);
-            if (student == null)throw new Exception("Student not found");
+            if (student == null) return false;
             _studentRepository.Delete(student);
             await _studentRepository.SaveChangesAsync();
+            return true;
         }
     }
 }
