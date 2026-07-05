@@ -1,6 +1,8 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using StudentManagement.Data;
+using StudentManagement.Repositories.Implementation;
+using StudentManagement.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<StudentManagementDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("StudentManagementConnection")));
+
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 

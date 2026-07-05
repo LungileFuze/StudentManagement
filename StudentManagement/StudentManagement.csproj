@@ -8,9 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Seed\" />
-    <Folder Include="Repositories\Interfaces\" />
-    <Folder Include="Repositories\Implementation\" />
-    <Folder Include="Services\Implementation\" />
   </ItemGroup>
 
   <ItemGroup>
