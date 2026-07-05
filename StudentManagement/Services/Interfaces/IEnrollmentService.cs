@@ -1,6 +1,19 @@
-﻿namespace StudentManagement.Services.Interfaces
+﻿using StudentManagement.ViewModels.Enrollment;
+
+namespace StudentManagement.Services.Interfaces
 {
-    public class IEnrollmentService
+    public interface IEnrollmentService
     {
+        Task<IEnumerable<EnrollmentViewModel>> GetAllAsync();
+
+        Task<EnrollmentDetailsViewModel?> GetByIdAsync(int id);
+
+        Task<EnrollmentFormViewModel?> GetForEditAsync(int id);
+
+        Task CreateAsync(EnrollmentFormViewModel model);
+
+        Task UpdateAsync(EnrollmentFormViewModel model);
+
+        Task DeleteAsync(int id);
     }
 }
