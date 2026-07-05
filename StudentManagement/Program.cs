@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using StudentManagement.Data;
 using StudentManagement.Repositories.Implementation;
 using StudentManagement.Repositories.Interfaces;
+using StudentManagement.Services.Implementation;
+using StudentManagement.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,10 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("StudentManagemen
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
