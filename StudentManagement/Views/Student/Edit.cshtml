@@ -1,0 +1,27 @@
+﻿@model StudentManagement.ViewModels.Student.StudentFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<h2>Edit Student</h2>
+
+<hr />
+
+<form asp-action="Edit" method="post">
+
+    <input asp-for="Id" type="hidden" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="_StudentForm" model="Model" />
+
+    <button type="submit" class="btn btn-primary">Update</button>
+
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

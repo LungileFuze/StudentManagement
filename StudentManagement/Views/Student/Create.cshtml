@@ -1,0 +1,25 @@
+﻿@model StudentManagement.ViewModels.Student.StudentFormViewModel
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<h2>Create Student</h2>
+
+<hr />
+
+<form asp-action="Create" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="_StudentForm" model="Model" />
+
+    <button type="submit" class="btn btn-primary"> Save </button>
+
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
