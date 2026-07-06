@@ -1,0 +1,34 @@
+﻿@model StudentManagement.ViewModels.Course.CourseDetailsViewModel
+
+@{
+    ViewData["Title"] = "Delete Course";
+}
+
+<h2>Delete Course</h2>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete this course?
+</div>
+
+<dl class="row">
+
+    <dt class="col-sm-3">Course Code</dt>
+    <dd class="col-sm-9">@Model.CourseCode</dd>
+
+    <dt class="col-sm-3">Course Name</dt>
+    <dd class="col-sm-9">@Model.CourseName</dd>
+
+    <dt class="col-sm-3">Credits</dt>
+    <dd class="col-sm-9">@Model.Credits</dd>
+
+</dl>
+
+<form asp-action="Delete">
+
+    <input asp-for="Id" type="hidden" />
+
+    <button type="submit" class="btn btn-danger"> Delete </button>
+
+    <a asp-action="Index" class="btn btn-secondary"> Cancel</a>
+
+</form>

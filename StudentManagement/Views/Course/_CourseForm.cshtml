@@ -1,0 +1,19 @@
+﻿@model StudentManagement.ViewModels.Course.CourseFormViewModel
+
+<div class="mb-3">
+    <label asp-for="CourseCode" class="form-label"></label>
+    <input asp-for="CourseCode" class="form-control" />
+    <span asp-validation-for="CourseCode" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="CourseName" class="form-label"></label>
+    <input asp-for="CourseName" class="form-control" />
+    <span asp-validation-for="CourseName" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Credits" class="form-label"></label>
+    <input asp-for="Credits" class="form-control" />
+    <span asp-validation-for="Credits" class="text-danger"></span>
+</div>
