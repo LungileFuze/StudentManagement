@@ -39,23 +39,23 @@ namespace StudentManagement.Services.Implementation
             await _enrollmentRepository.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var enrollment = await _enrollmentRepository.GetByIdAsync(id);
-            if (enrollment == null) throw new Exception("Enrollment not found");
+            if (enrollment == null) return false;
             _enrollmentRepository.Delete(enrollment);
             await _enrollmentRepository.SaveChangesAsync();
+            return true;
         }
 
        
-
-    
-
-    
-
-        public Task UpdateAsync(EnrollmentFormViewModel model)
+        public async Task<bool> UpdateAsync(EnrollmentFormViewModel model)
         {
-            throw new NotImplementedException();
+            var enrollment = await _enrollmentRepository.GetByIdAsync(model.Id);
+            if(enrollment == null) return false;
+            enrollment.UpdateEntity(model);
+            await _enrollmentRepository.SaveChangesAsync();
+            return true;
         }
     }
 }
