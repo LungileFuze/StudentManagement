@@ -1,0 +1,38 @@
+﻿@model StudentManagement.ViewModels.Enrollment.EnrollmentDetailsViewModel
+
+@{
+    ViewData["Title"] = "Enrollment Details";
+}
+
+<h2>Enrollment Details</h2>
+
+<hr />
+
+<dl class="row">
+
+    <dt class="col-sm-3">Student</dt>
+    <dd class="col-sm-9">@Model.StudentName</dd>
+
+    <dt class="col-sm-3">Student Number</dt>
+    <dd class="col-sm-9">@Model.StudentNumber</dd>
+
+    <dt class="col-sm-3">Course</dt>
+    <dd class="col-sm-9">@Model.CourseName</dd>
+
+    <dt class="col-sm-3">Course Code</dt>
+    <dd class="col-sm-9">@Model.CourseCode</dd>
+
+    <dt class="col-sm-3">Enrolled Date</dt>
+    <dd class="col-sm-9">@Model.EnrolledDate.ToShortDateString()</dd>
+
+    <dt class="col-sm-3">Final Mark</dt>
+    <dd class="col-sm-9">@Model.FinalMark</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+
+</dl>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> Edit</a>
+
+<a asp-action="Index" class="btn btn-secondary">Back</a>

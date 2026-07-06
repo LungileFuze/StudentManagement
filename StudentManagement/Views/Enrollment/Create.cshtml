@@ -1,0 +1,25 @@
+﻿@model StudentManagement.ViewModels.Enrollment.EnrollmentFormViewModel
+
+@{
+    ViewData["Title"] = "Create Enrollment";
+}
+
+<h2>Create Enrollment</h2>
+
+<hr />
+
+<form asp-action="Create" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="_EnrollmentForm" model="Model" />
+
+    <button type="submit" class="btn btn-success">Save</button>
+
+    <a asp-action="Index" class="btn btn-secondary"> Cancel </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

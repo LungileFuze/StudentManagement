@@ -1,0 +1,51 @@
+﻿@model StudentManagement.ViewModels.Enrollment.EnrollmentFormViewModel
+@using StudentManagement.Enums
+
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+        <label asp-for="StudentId" class="form-label"></label>
+
+        <select asp-for="StudentId" asp-items="Model.Students" class="form-select">
+            <option value="">-- Select Student --</option>
+        </select>
+
+        <span asp-validation-for="StudentId" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label asp-for="CourseId" class="form-label"></label>
+
+        <select asp-for="CourseId" asp-items="Model.Courses" class="form-select">
+            <option value="">-- Select Course --</option>
+        </select>
+
+        <span asp-validation-for="CourseId" class="text-danger"></span>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <label asp-for="EnrolledDate" class="form-label"></label>
+        <input asp-for="EnrolledDate" type="date" class="form-control" />
+        <span asp-validation-for="EnrolledDate" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <label asp-for="FinalMark" class="form-label"></label>
+        <input asp-for="FinalMark" class="form-control" />
+        <span asp-validation-for="FinalMark" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <label asp-for="Status" class="form-label"></label>
+
+        <select asp-for="Status" asp-items="Html.GetEnumSelectList<EnrollmentStatus>()" class="form-select">
+        </select>
+
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+</div>

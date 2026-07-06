@@ -11,6 +11,12 @@ namespace StudentManagement.Repositories.Implementation
         {
         }
 
+        public override async Task<IEnumerable<Enrollment>> GetAllAsync()
+        {
+            return await _context.Enrollments.Include(e => e.Student).Include(e => e.Course).ToListAsync();
+        }
+
+
         public override async Task<Enrollment?> GetByIdAsync(int id)
         {
             return await _context.Enrollments.Include(e => e.Student).Include(e => e.Course).FirstOrDefaultAsync(e => e.Id == id);
