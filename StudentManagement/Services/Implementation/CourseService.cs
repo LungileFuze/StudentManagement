@@ -41,21 +41,25 @@ namespace StudentManagement.Services.Implementation
             await _courseRepository.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(CourseFormViewModel model)
+        public async Task<bool> UpdateAsync(CourseFormViewModel model)
         {
             var course = await _courseRepository.GetByIdAsync(model.Id);
-            if (course == null) throw new Exception("Course not found");
+            if (course == null) return false;
             course.UpdateEntity(model);
             _courseRepository.Update(course);
             await _courseRepository.SaveChangesAsync();
+            return true;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var course = await _courseRepository.GetByIdAsync(id);
-            if (course == null) throw new Exception("Course not found");
+            if (course == null) return false;
             _courseRepository.Delete(course);
             await _courseRepository.SaveChangesAsync();
+            return true;
+
+
         }
 
        

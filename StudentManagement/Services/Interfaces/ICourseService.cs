@@ -12,8 +12,8 @@ namespace StudentManagement.Services.Interfaces
 
         Task CreateAsync(CourseFormViewModel model);
 
-        Task UpdateAsync(CourseFormViewModel model);
+        Task<bool> UpdateAsync(CourseFormViewModel model);
 
-        Task DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }
