@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using StudentManagement.Configurations;
 using StudentManagement.Models;
+using StudentManagement.Models.Identity;
 
 namespace StudentManagement.Data
 {
-    public class StudentManagementDbContext : DbContext
+    public class StudentManagementDbContext : IdentityDbContext<ApplicationUser>
     {
         public StudentManagementDbContext(DbContextOptions<StudentManagementDbContext> options) : base(options)
         {
