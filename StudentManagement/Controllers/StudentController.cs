@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using FluentValidation;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using StudentManagement.Helpers;
 using StudentManagement.Services.Interfaces;
-using StudentManagement.ViewModels.Student;
 using StudentManagement.Validators;
+using StudentManagement.ViewModels.Student;
 
 namespace StudentManagement.Controllers
 {
@@ -51,6 +52,8 @@ namespace StudentManagement.Controllers
 
             await _studentService.CreateAsync(model);
 
+            TempData[TempDataKeys.Success] = "Student created successfully.";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -80,6 +83,8 @@ namespace StudentManagement.Controllers
                 return NotFound();
             }
 
+            TempData[TempDataKeys.Success] = "Student updated successfully.";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -102,6 +107,8 @@ namespace StudentManagement.Controllers
             {
                 return NotFound();
             }
+
+            TempData[TempDataKeys.Success] = "Student deleted successfully.";
 
             return RedirectToAction(nameof(Index));
         }

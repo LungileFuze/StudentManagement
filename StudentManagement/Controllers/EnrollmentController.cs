@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StudentManagement.Helpers;
 using StudentManagement.Services.Interfaces;
 using StudentManagement.Validators;
 using StudentManagement.ViewModels.Enrollment;
@@ -54,6 +55,8 @@ namespace StudentManagement.Controllers
 
             await _enrollmentService.CreateAsync(model);
 
+            TempData[TempDataKeys.Success] = "Enrollment created successfully.";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -97,6 +100,8 @@ namespace StudentManagement.Controllers
             if (!await _enrollmentService.UpdateAsync(model))
                 return NotFound();
 
+            TempData[TempDataKeys.Success] = "Enrollment updated successfully.";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -116,6 +121,8 @@ namespace StudentManagement.Controllers
         {
             if (!await _enrollmentService.DeleteAsync(id))
                 return NotFound();
+
+            TempData[TempDataKeys.Success] = "Enrollment deleted successfully.";
 
             return RedirectToAction(nameof(Index));
         }

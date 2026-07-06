@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using StudentManagement.Helpers;
 using StudentManagement.Services.Interfaces;
 using StudentManagement.Validators;
 using StudentManagement.ViewModels.Course;
@@ -43,6 +44,8 @@ namespace StudentManagement.Controllers
 
             await _courseService.CreateAsync(model);
 
+            TempData[TempDataKeys.Success] = "Course created successfully.";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -83,6 +86,8 @@ namespace StudentManagement.Controllers
             if (!await _courseService.UpdateAsync(model))
                 return NotFound();
 
+            TempData[TempDataKeys.Success] = "Course updated successfully.";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -103,6 +108,8 @@ namespace StudentManagement.Controllers
         {
             if (!await _courseService.DeleteAsync(id))
                 return NotFound();
+
+            TempData[TempDataKeys.Success] = "Course deleted successfully.";
 
             return RedirectToAction(nameof(Index));
         }
