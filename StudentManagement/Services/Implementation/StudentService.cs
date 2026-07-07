@@ -59,6 +59,13 @@ namespace StudentManagement.Services.Implementation
             await _studentRepository.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<StudentViewModel>> SearchAsync(string searchTerm)
+        {
+            var students = await _studentRepository.SearchAsync(searchTerm);
+
+            return students.Select(s => s.ToViewModel());
+        }
     }
 }
 

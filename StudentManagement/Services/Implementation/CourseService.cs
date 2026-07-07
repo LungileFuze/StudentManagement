@@ -1,7 +1,9 @@
 ﻿using StudentManagement.Mappings;
+using StudentManagement.Repositories.Implementation;
 using StudentManagement.Repositories.Interfaces;
 using StudentManagement.Services.Interfaces;
 using StudentManagement.ViewModels.Course;
+using StudentManagement.ViewModels.Student;
 
 namespace StudentManagement.Services.Implementation
 {
@@ -58,11 +60,16 @@ namespace StudentManagement.Services.Implementation
             _courseRepository.Delete(course);
             await _courseRepository.SaveChangesAsync();
             return true;
-
-
         }
 
-       
-       
+        public async Task<IEnumerable<CourseViewModel>> SearchAsync(string searchTerm)
+        {
+            var courses = await _courseRepository.SearchAsync(searchTerm);
+
+            return courses.Select(c => c.ToViewModel());
+        }
+
+
+
     }
 }

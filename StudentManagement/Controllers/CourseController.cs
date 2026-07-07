@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.Helpers;
+using StudentManagement.Services.Implementation;
 using StudentManagement.Services.Interfaces;
 using StudentManagement.Validators;
 using StudentManagement.ViewModels.Course;
@@ -20,10 +21,14 @@ namespace StudentManagement.Controllers
             _validator = validator;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm)
         {
-            var courses = await _courseService.GetAllAsync();
+            var courses = string.IsNullOrWhiteSpace(searchTerm) ? await _courseService.GetAllAsync() : await _courseService.SearchAsync(searchTerm);
+
+            ViewBag.SearchTerm = searchTerm;
             return View(courses);
+            //var courses = await _courseService.GetAllAsync();
+            //return View(courses);
         }
 
         [HttpGet]

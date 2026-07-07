@@ -20,9 +20,11 @@ namespace StudentManagement.Controllers
             _validator = validator;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm)
         {
-            var students = await _studentService.GetAllAsync();
+            var students = string.IsNullOrWhiteSpace(searchTerm) ? await _studentService.GetAllAsync() : await _studentService.SearchAsync(searchTerm);
+
+            ViewBag.SearchTerm = searchTerm;
             return View(students);
         }
 

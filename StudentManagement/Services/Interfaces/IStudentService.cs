@@ -15,5 +15,7 @@ namespace StudentManagement.Services.Interfaces
         Task<bool> UpdateAsync(StudentFormViewModel model);
 
         Task<bool> DeleteAsync(int id);
+
+        Task<IEnumerable<StudentViewModel>> SearchAsync(string searchTerm);
     }
 }

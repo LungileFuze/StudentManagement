@@ -1,4 +1,5 @@
 ﻿using StudentManagement.ViewModels.Course;
+using StudentManagement.ViewModels.Student;
 
 namespace StudentManagement.Services.Interfaces
 {
@@ -15,5 +16,7 @@ namespace StudentManagement.Services.Interfaces
         Task<bool> UpdateAsync(CourseFormViewModel model);
 
         Task<bool> DeleteAsync(int id);
+
+        Task<IEnumerable<CourseViewModel>> SearchAsync(string searchTerm);
     }
 }
