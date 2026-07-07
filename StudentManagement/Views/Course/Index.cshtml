@@ -1,4 +1,5 @@
-﻿@model IEnumerable<StudentManagement.ViewModels.Course.CourseViewModel>
+﻿@using StudentManagement.Helpers
+@model IEnumerable<StudentManagement.ViewModels.Course.CourseViewModel>
 
 @{
     ViewData["Title"] = "Courses";
@@ -6,8 +7,11 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="mb-0">Courses</h2>
-
-    <a asp-action="Create" class="btn btn-success">Add Course</a>
+    @if (User.IsInRole(Roles.Admin))
+    {
+        <a asp-action="Create" class="btn btn-success">Add Course</a>
+    }
+ 
 </div>
 
 @if (!Model.Any())
@@ -44,9 +48,13 @@ else
 
                             <a asp-action="Details" asp-route-id="@course.Id" class="btn btn-info btn-sm">Details </a>
 
-                            <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-warning btn-sm"> Edit</a>
+                            @if (User.IsInRole(Roles.Admin))
+                            {
+                                <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-warning btn-sm"> Edit</a>
 
-                            <a asp-action="Delete" asp-route-id="@course.Id" class="btn btn-danger btn-sm"> Delete</a>
+                                <a asp-action="Delete" asp-route-id="@course.Id" class="btn btn-danger btn-sm"> Delete</a>
+                            }
+
 
                         </div>
                     </td>

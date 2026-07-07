@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.Helpers;
 using StudentManagement.Services.Interfaces;
@@ -7,6 +8,7 @@ using StudentManagement.ViewModels.Student;
 
 namespace StudentManagement.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private readonly IStudentService _studentService;
@@ -32,6 +34,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             return View(new StudentFormViewModel());
@@ -39,6 +42,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Create(StudentFormViewModel model)
         {
             var validationResult = await _validator.ValidateAsync(model);
@@ -58,6 +62,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(int id)
         {
             var student = await _studentService.GetForEditAsync(id);
@@ -67,6 +72,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(StudentFormViewModel model)
         {
             var validationResult = await _validator.ValidateAsync(model);
@@ -89,6 +95,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var student = await _studentService.GetByIdAsync(id);
@@ -99,6 +106,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var deleted = await _studentService.DeleteAsync(id);

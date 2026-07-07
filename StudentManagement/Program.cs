@@ -5,6 +5,7 @@ using StudentManagement.Data;
 using StudentManagement.Models.Identity;
 using StudentManagement.Repositories.Implementation;
 using StudentManagement.Repositories.Interfaces;
+using StudentManagement.Seed;
 using StudentManagement.Services.Implementation;
 using StudentManagement.Services.Interfaces;
 
@@ -67,5 +68,12 @@ app.UseAuthorization();
 
 
 app.MapControllerRoute(name: "default",pattern: "{controller=Student}/{action=Index}/{id?}");
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    await IdentitySeeder.SeedAsync(services);
+}
 
 app.Run();

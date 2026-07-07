@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using StudentManagement.Helpers;
 using StudentManagement.Models.Identity;
+using System.Security.Claims;
 
 namespace StudentManagement.Seed
 {
@@ -33,16 +34,39 @@ namespace StudentManagement.Seed
                 {
                     FirstName = DefaultUsers.AdminFirstName,
                     LastName = DefaultUsers.AdminLastName,
-                    UserName = DefaultUsers.AdminEmail,
+                    UserName = DefaultUsers.AdminUserName,
                     Email = DefaultUsers.AdminEmail,
                     EmailConfirmed = true
                 };
 
                 var result = await userManager.CreateAsync(admin, DefaultUsers.AdminPassword);
 
+
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, Roles.Admin);
+                }
+
+            }
+
+            var lecturer = await userManager.FindByEmailAsync(DefaultUsers.LecturerEmail);
+
+            if (lecturer == null)
+            {
+                lecturer = new ApplicationUser
+                {
+                    FirstName = DefaultUsers.LecturerFirstName,
+                    LastName = DefaultUsers.LecturerLastName,
+                    UserName = DefaultUsers.LecturerUserName,
+                    Email = DefaultUsers.LecturerEmail,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(lecturer, DefaultUsers.LecturerPassword);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(lecturer, Roles.Lecturer);
                 }
             }
         }

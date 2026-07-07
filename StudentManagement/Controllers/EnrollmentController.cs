@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentManagement.Helpers;
@@ -8,6 +9,7 @@ using StudentManagement.ViewModels.Enrollment;
 
 namespace StudentManagement.Controllers
 {
+    [Authorize]
     public class EnrollmentController : Controller
     {
         private readonly IEnrollmentService _enrollmentService;
@@ -29,6 +31,7 @@ namespace StudentManagement.Controllers
             return View(enrollments);
         }
         [HttpGet]
+        [Authorize(Roles = $"{Roles.Admin},{Roles.Lecturer}")]
         public async Task<IActionResult> Create()
         {
             var model = new EnrollmentFormViewModel();
@@ -40,6 +43,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = $"{Roles.Admin},{Roles.Lecturer}")]
         public async Task<IActionResult> Create(EnrollmentFormViewModel model)
         {
             var validationResult = await _validator.ValidateAsync(model);
@@ -71,6 +75,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{Roles.Admin},{Roles.Lecturer}")]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await _enrollmentService.GetForEditAsync(id);
@@ -84,6 +89,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = $"{Roles.Admin},{Roles.Lecturer}")]
         public async Task<IActionResult> Edit(EnrollmentFormViewModel model)
         {
             var validationResult = await _validator.ValidateAsync(model);
@@ -106,6 +112,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var enrollment = await _enrollmentService.GetByIdAsync(id);
@@ -117,6 +124,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (!await _enrollmentService.DeleteAsync(id))

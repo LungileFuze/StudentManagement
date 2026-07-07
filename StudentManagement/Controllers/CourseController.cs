@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagement.Helpers;
 using StudentManagement.Services.Interfaces;
@@ -7,6 +8,7 @@ using StudentManagement.ViewModels.Course;
 
 namespace StudentManagement.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ICourseService _courseService;
@@ -25,6 +27,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public IActionResult Create()
         {
             return View(new CourseFormViewModel());
@@ -32,6 +35,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Create(CourseFormViewModel model)
         {
             var validationResult = await _validator.ValidateAsync(model);
@@ -61,6 +65,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(int id)
         {
             var course = await _courseService.GetForEditAsync(id);
@@ -73,6 +78,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Edit(CourseFormViewModel model)
         {
             var validationResult = await _validator.ValidateAsync(model);
@@ -92,6 +98,7 @@ namespace StudentManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var course = await _courseService.GetByIdAsync(id);
@@ -104,6 +111,7 @@ namespace StudentManagement.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (!await _courseService.DeleteAsync(id))

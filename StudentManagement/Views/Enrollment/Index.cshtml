@@ -1,4 +1,5 @@
-﻿@model IEnumerable<StudentManagement.ViewModels.Enrollment.EnrollmentViewModel>
+﻿@using StudentManagement.Helpers
+@model IEnumerable<StudentManagement.ViewModels.Enrollment.EnrollmentViewModel>
 
 @{
     ViewData["Title"] = "Enrollments";
@@ -59,8 +60,11 @@ else
 
                             <a asp-action="Edit" asp-route-id="@enrollment.Id" class="btn btn-warning btn-sm"> Edit</a>
 
-                            <a asp-action="Delete" asp-route-id="@enrollment.Id" class="btn btn-danger btn-sm"> Delete</a>
-
+                            @if (User.IsInRole(Roles.Admin))
+                            {
+                                <a asp-action="Delete" asp-route-id="@enrollment.Id" class="btn btn-danger btn-sm"> Delete</a>
+                            }
+                            
                         </div>
 
                     </td>
